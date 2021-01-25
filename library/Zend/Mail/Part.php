@@ -148,7 +148,8 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface, Cou
         } else if (isset($params['headers'])) {
             if (is_array($params['headers'])) {
                 $this->_headers = $params['headers'];
-                $this->_validateHeaders($this->_headers);
+                // SD13922 - Prevent issues loading emails from office 365
+                // $this->_validateHeaders($this->_headers);
             } else {
                 if (!empty($params['noToplines'])) {
                     Zend_Mime_Decode::splitMessage($params['headers'], $this->_headers, $null, "\r\n");
